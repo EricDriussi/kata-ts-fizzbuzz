@@ -1,5 +1,3 @@
-console.log('Hello world!');
+import { FizzBuzz } from './FizzBuzz';
 
-export function foo () {
-	return true;
-}
+console.log(FizzBuzz.run());
