@@ -1,3 +1,3 @@
 import { FizzBuzz } from './FizzBuzz';
 
-console.log(FizzBuzz.run());
+console.log(FizzBuzz.runFor());
