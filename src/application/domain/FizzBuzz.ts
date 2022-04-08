@@ -1,6 +1,8 @@
+import { FizzBuzzArray } from './model/FizzBuzzArray';
+
 export class FizzBuzz {
-	public static runFor (count: number = 100): (number | string)[] {
-		const output: (number|string)[] = [];
+	public static runFor (count: number = 100): FizzBuzzArray {
+		const output = new FizzBuzzArray();
 
 		for (let number = 1; number <= count; number++) {
 			output.push(this.replace(number));
