@@ -20,13 +20,22 @@ describe('FizzBuzz should output', () => {
 		expect(FizzBuzz.runFor(100)).toStrictEqual(fullExpectedOutput);
 	});
 });
+
+describe('FizzBuzzChooser should output', () => {
+	let oneToSixteen: number[];
+	beforeEach(() => {
+		oneToSixteen = Array.from({ length: 16 }, (_, i) => i + 1);
+	});
+
 	it('Fizz for multiples of 3', () => {
-		expect(FizzBuzz.run()).toStrictEqual(fizzExpectedOutput);
+		expect(FizzBuzzChooser.fizzer(oneToSixteen)).toStrictEqual(fizzerExpectedOutput);
 	});
 
 	it('Buzz for multiples of 5', () => {
+		expect(FizzBuzzChooser.buzzer(oneToSixteen)).toStrictEqual(buzzerExpectedOutput);
 	});
 
 	it('Fizzbuzz for multiples of 3 and 5', () => {
+		expect(FizzBuzzChooser.fizzbuzzer(oneToSixteen)).toStrictEqual(fizzbuzzerExpectedOutput);
 	});
 });
