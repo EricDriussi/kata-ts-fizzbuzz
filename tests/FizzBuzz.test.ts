@@ -2,6 +2,7 @@ import { FizzBuzz } from '../src/application/domain/FizzBuzz';
 import { Fizz } from '../src/application/domain/model/Fizz';
 import { Buzz } from '../src/application/domain/model/Buzz';
 import { FizzBuzzArray } from '../src/application/domain/model/FizzBuzzArray';
+import { Fizzbuzz } from '../src/application/domain/model/Fizzbuzz';
 
 const fullExpectedOutput = [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'Fizzbuzz', 16, 17, 'Fizz', 19, 'Buzz', 'Fizz', 22, 23, 'Fizz', 'Buzz', 26, 'Fizz', 28, 29, 'Fizzbuzz', 31, 32, 'Fizz', 34, 'Buzz', 'Fizz', 37, 38, 'Fizz', 'Buzz', 41, 'Fizz', 43, 44, 'Fizzbuzz', 46, 47, 'Fizz', 49, 'Buzz', 'Fizz', 52, 53, 'Fizz', 'Buzz', 56, 'Fizz', 58, 59, 'Fizzbuzz', 61, 62, 'Fizz', 64, 'Buzz', 'Fizz', 67, 68, 'Fizz', 'Buzz', 71, 'Fizz', 73, 74, 'Fizzbuzz', 76, 77, 'Fizz', 79, 'Buzz', 'Fizz', 82, 83, 'Fizz', 'Buzz', 86, 'Fizz', 88, 89, 'Fizzbuzz', 91, 92, 'Fizz', 94, 'Buzz', 'Fizz', 97, 98, 'Fizz', 'Buzz'];
 const partialExpectedOutput = [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'Fizzbuzz', 16];
@@ -50,12 +51,12 @@ describe('The domain model should consist of', () => {
 	});
 
 	describe('a Buzz VO that', () => {
-		it('outputs its name when evaluating a number divisible by 3', () => {
+		it('outputs its name when evaluating a number divisible by 5', () => {
 			const buzz = new Buzz();
 			expect(buzz.evaluate(5)).toEqual('Buzz');
 		});
 
-		it('outputs the received value when evaluating a number NOT divisible by 3', () => {
+		it('outputs the received value when evaluating a number NOT divisible by 5', () => {
 			const buzz = new Buzz();
 			expect(buzz.evaluate(4)).toEqual(4);
 		});
@@ -81,35 +82,35 @@ describe('The domain model should consist of', () => {
 		});
 	});
 
-	describe.skip('a FizzBuzz VO that', () => {
-		it('outputs its name when evaluating a number divisible by 3', () => {
-			const fizz = new Fizz();
-			expect(fizz.evaluate(3)).toEqual('Fizz');
+	describe('a FizzBuzz VO that', () => {
+		it('outputs its name when evaluating a number divisible by 3 and 5', () => {
+			const fizzBuzz = new Fizzbuzz();
+			expect(fizzBuzz.evaluate(15)).toEqual('Fizzbuzz');
 		});
 
-		it('outputs the received value when evaluating a number NOT divisible by 3', () => {
-			const fizz = new Fizz();
-			expect(fizz.evaluate(4)).toEqual(4);
+		it('outputs the received value when evaluating a number NOT divisible by 3 and 5', () => {
+			const fizzBuzz = new Fizzbuzz();
+			expect(fizzBuzz.evaluate(3)).toEqual(3);
 		});
 
-		it('accepts Fizz as a valid name', () => {
-			const fizz = new Fizz('Fizz');
-			expect(fizz.toString()).toEqual('Fizz');
+		it('accepts Fizzbuzz as a valid name', () => {
+			const fizzBuzz = new Fizzbuzz('Fizzbuzz');
+			expect(fizzBuzz.toString()).toEqual('Fizzbuzz');
 		});
 
-		it('accepts Blizz as a valid name', () => {
-			const fizz = new Fizz('Blizz');
-			expect(fizz.toString()).toEqual('Blizz');
+		it('accepts Blizzblubb as a valid name', () => {
+			const fizzBuzz = new Fizzbuzz('Blizzblubb');
+			expect(fizzBuzz.toString()).toEqual('Blizzblubb');
 		});
 
 		it('breaks when given an invalid name', () => {
-			const fizz = new Fizz('Peter');
-			expect(fizz.toString()).toEqual('INVALID-NAME');
+			const fizzBuzz = new Fizzbuzz('Peter');
+			expect(fizzBuzz.toString()).toEqual('INVALID-NAME');
 		});
 
 		it('evaluates to false when a valid number is given but an invalid name is assigned', () => {
-			const fizz = new Fizz('Peter');
-			expect(fizz.evaluate(3)).toBeFalsy();
+			const fizzBuzz = new Fizzbuzz('Peter');
+			expect(fizzBuzz.evaluate(15)).toBeFalsy();
 		});
 	});
 
