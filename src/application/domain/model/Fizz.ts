@@ -1,3 +1,5 @@
+import { FizzBuzzItem } from './FizzBuzzItem';
+
 export class Fizz {
 	private readonly name: string;
 
@@ -9,7 +11,7 @@ export class Fizz {
 		}
 	}
 
-	public evaluate (value: number): number | string | boolean {
+	public evaluate (value: number): FizzBuzzItem {
 		if (!Fizz.valueIsDivByThree(value)) {
 			return value;
 		}
