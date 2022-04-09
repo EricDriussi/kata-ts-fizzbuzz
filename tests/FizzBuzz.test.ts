@@ -19,9 +19,14 @@ describe('FizzBuzz should output', () => {
 
 describe('The domain model should consist of', () => {
 	describe('a Fizz VO', () => {
-		it('that prints its name', () => {
-			const fizz = new Fizz();
+		it('that prints its name when a valid number is passed', () => {
+			const fizz = new Fizz(3);
 			expect(fizz.toString()).toEqual('Fizz');
+		});
+
+		it('but doesnt when an invalid number is passed', () => {
+			const fizz = new Fizz(4);
+			expect(fizz.toString()).toEqual('WRONG');
 		});
 	});
 
