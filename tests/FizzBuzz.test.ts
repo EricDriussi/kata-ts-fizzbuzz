@@ -18,15 +18,35 @@ describe('FizzBuzz should output', () => {
 });
 
 describe('The domain model should consist of', () => {
-	describe('a Fizz VO', () => {
-		it('that prints its name when a valid number is passed', () => {
-			const fizz = new Fizz(3);
+	describe('a Fizz VO that', () => {
+		it('outputs its name when evaluating a number divisible by 3', () => {
+			const fizz = new Fizz();
+			expect(fizz.evaluate(3)).toEqual('Fizz');
+		});
+
+		it('outputs the received value when evaluating a number NOT divisible by 3', () => {
+			const fizz = new Fizz();
+			expect(fizz.evaluate(4)).toEqual(4);
+		});
+
+		it('accepts Fizz as a valid name', () => {
+			const fizz = new Fizz('Fizz');
 			expect(fizz.toString()).toEqual('Fizz');
 		});
 
-		it('but doesnt when an invalid number is passed', () => {
-			const fizz = new Fizz(4);
-			expect(fizz.toString()).toEqual('WRONG');
+		it('accepts Blizz as a valid name', () => {
+			const fizz = new Fizz('Blizz');
+			expect(fizz.toString()).toEqual('Blizz');
+		});
+
+		it('breaks when given an invalid name', () => {
+			const fizz = new Fizz('Peter');
+			expect(fizz.toString()).toEqual('INVALID-NAME');
+		});
+
+		it('evaluates to false when a valid number is given but an invalid name is assigned', () => {
+			const fizz = new Fizz('Peter');
+			expect(fizz.evaluate(3)).toBeFalsy();
 		});
 	});
 
