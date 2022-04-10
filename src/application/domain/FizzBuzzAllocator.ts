@@ -53,20 +53,16 @@ export class FizzBuzzAllocator {
 		}
 	): FizzBuzzArray {
 		return partialArrays.fizzBuzzedArray.reduce((acc, curr, index) => {
-			if (typeof curr === 'number') {
+			if (typeof curr !== 'number') {
+				return acc;
+			}
+			if (typeof partialArrays.fizzedArray[index] !== 'number') {
 				acc[index] = partialArrays.fizzedArray[index];
 			}
-			if (typeof acc[index] === 'number') {
+			if (typeof partialArrays.buzzedArray[index] !== 'number') {
 				acc[index] = partialArrays.buzzedArray[index];
 			}
 			return acc;
 		}, partialArrays.fizzBuzzedArray);
 	}
 }
-//
-// return this.interestInsights.reduce((audienseInterestList, audienseInterest) => {
-// 	if ( audienseInterest.percentage.value() > config.gwi.thresholds.mandatoryInterest ) {
-// 		audienseInterestList.push(audienseInterest.interest);
-// 	}
-// 	return audienseInterestList;
-// }, [] as Array<AudienseInterest>);
