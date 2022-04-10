@@ -5,8 +5,8 @@ export class Buzz {
 		this.name = Buzz.nameIsValid(name) ? name : 'INVALID-NAME';
 	}
 
-	public evaluate (value: number): FizzBuzzItem {
-		if (!Buzz.valueIsDivByFive(value)) {
+	public evaluate (value: FizzBuzzItem): FizzBuzzItem {
+		if (!Buzz.valueIsDivByFive(+value)) {
 			return value;
 		}
 		if (!Buzz.nameIsValid(this.name)) {

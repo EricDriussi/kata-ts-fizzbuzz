@@ -3,9 +3,13 @@ import { Fizz } from '../src/application/domain/model/Fizz';
 import { Buzz } from '../src/application/domain/model/Buzz';
 import { FizzBuzzArray } from '../src/application/domain/model/FizzBuzzArray';
 import { Fizzbuzz } from '../src/application/domain/model/Fizzbuzz';
+import { FizzBuzzAllocator } from '../src/application/domain/FizzBuzzAllocator';
 
 const fullExpectedOutput = [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'Fizzbuzz', 16, 17, 'Fizz', 19, 'Buzz', 'Fizz', 22, 23, 'Fizz', 'Buzz', 26, 'Fizz', 28, 29, 'Fizzbuzz', 31, 32, 'Fizz', 34, 'Buzz', 'Fizz', 37, 38, 'Fizz', 'Buzz', 41, 'Fizz', 43, 44, 'Fizzbuzz', 46, 47, 'Fizz', 49, 'Buzz', 'Fizz', 52, 53, 'Fizz', 'Buzz', 56, 'Fizz', 58, 59, 'Fizzbuzz', 61, 62, 'Fizz', 64, 'Buzz', 'Fizz', 67, 68, 'Fizz', 'Buzz', 71, 'Fizz', 73, 74, 'Fizzbuzz', 76, 77, 'Fizz', 79, 'Buzz', 'Fizz', 82, 83, 'Fizz', 'Buzz', 86, 'Fizz', 88, 89, 'Fizzbuzz', 91, 92, 'Fizz', 94, 'Buzz', 'Fizz', 97, 98, 'Fizz', 'Buzz'];
 const partialExpectedOutput = [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'Fizzbuzz', 16];
+const buzzedExpectedOutput = [1, 2, 3, 4, 'Buzz', 6, 7, 8, 9, 'Buzz', 11, 12, 13, 14, 'Buzz', 16];
+const fizzedExpectedOutput = [1, 2, 'Fizz', 4, 5, 'Fizz', 7, 8, 'Fizz', 10, 11, 'Fizz', 13, 14, 'Fizz', 16];
+const fizzBuzzedExpectedOutput = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 'Fizzbuzz', 16];
 
 describe('FizzBuzz should output', () => {
 	it('the expected partial output', () => {
@@ -14,6 +18,42 @@ describe('FizzBuzz should output', () => {
 
 	it('the expected full output', () => {
 		expect(FizzBuzz.runFor(100)).toStrictEqual(fullExpectedOutput);
+	});
+});
+
+describe('The domain should have', () => {
+	describe('a FizzBuzzAllocator that', () => {
+		it('Fizzes an incoming number array', () => {
+			const oneToSixteen = Array.from({ length: 16 }, (_, i) => i + 1);
+
+			const fizzedArray = FizzBuzzAllocator.fizzArray(oneToSixteen);
+
+			expect(fizzedArray).toStrictEqual(fizzedExpectedOutput);
+		});
+
+		it('Buzzes an incoming number array', () => {
+			const oneToSixteen = Array.from({ length: 16 }, (_, i) => i + 1);
+
+			const buzzedArray = FizzBuzzAllocator.buzzArray(oneToSixteen);
+
+			expect(buzzedArray).toStrictEqual(buzzedExpectedOutput);
+		});
+
+		it('FizzBuzzes an incoming number array', () => {
+			const oneToSixteen = Array.from({ length: 16 }, (_, i) => i + 1);
+
+			const fizzBuzzedArray = FizzBuzzAllocator.fizzBuzzArray(oneToSixteen);
+
+			expect(fizzBuzzedArray).toStrictEqual(fizzBuzzedExpectedOutput);
+		});
+
+		it('correctly allocates an incoming number array', () => {
+			const oneToOneHundred = Array.from({ length: 100 }, (_, i) => i + 1);
+
+			const allocatedArray = FizzBuzzAllocator.allocate(oneToOneHundred);
+
+			expect(allocatedArray).toStrictEqual(fullExpectedOutput);
+		});
 	});
 });
 
