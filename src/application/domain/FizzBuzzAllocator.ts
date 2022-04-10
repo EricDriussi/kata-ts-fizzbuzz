@@ -5,12 +5,18 @@ import { Fizzbuzz } from './model/Fizzbuzz';
 
 export class FizzBuzzAllocator {
 	public static allocate (numberArray: number[]): FizzBuzzArray {
-		const fizz = new Fizz();
-		const buzz = new Buzz();
-		const fizzBuzz = new Fizzbuzz();
+		// const fizz = new Fizz();
+		// const buzz = new Buzz();
+		// const fizzBuzz = new Fizzbuzz();
 
-		const allocatedArray = numberArray.map(item => fizz.evaluate(buzz.evaluate(fizzBuzz.evaluate(item))));
-		return allocatedArray;
+		return FizzBuzzAllocator.merge({
+			fizzedArray: FizzBuzzAllocator.fizzArray(numberArray),
+			buzzedArray: FizzBuzzAllocator.buzzArray(numberArray),
+			fizzBuzzedArray: FizzBuzzAllocator.fizzBuzzArray(numberArray)
+		});
+
+		// const allocatedArray = numberArray.map(item => fizz.evaluate(buzz.evaluate(fizzBuzz.evaluate(item))));
+		// return allocatedArray;
 	}
 
 	public static fizzArray (numberArray: number[]): FizzBuzzArray {
@@ -31,11 +37,36 @@ export class FizzBuzzAllocator {
 		return this.parse(numberArray, fizzBuzz);
 	}
 
-	private static parse (numberArray: number[], fizzBuzz: Fizzbuzz) {
+	private static parse (numberArray: number[], fizzOrBuzz: Fizzbuzz) {
 		const fizzBuzzArray = new FizzBuzzArray();
 		for (const item of numberArray) {
-			fizzBuzzArray.push(fizzBuzz.evaluate(item));
+			fizzBuzzArray.push(fizzOrBuzz.evaluate(item));
 		}
 		return fizzBuzzArray;
 	}
+
+	private static merge (
+		partialArrays: {
+			fizzBuzzedArray: FizzBuzzArray;
+			fizzedArray: FizzBuzzArray;
+			buzzedArray: FizzBuzzArray
+		}
+	): FizzBuzzArray {
+		return partialArrays.fizzBuzzedArray.reduce((acc, curr, index) => {
+			if (typeof curr === 'number') {
+				acc[index] = partialArrays.fizzedArray[index];
+			}
+			if (typeof acc[index] === 'number') {
+				acc[index] = partialArrays.buzzedArray[index];
+			}
+			return acc;
+		}, partialArrays.fizzBuzzedArray);
+	}
 }
+//
+// return this.interestInsights.reduce((audienseInterestList, audienseInterest) => {
+// 	if ( audienseInterest.percentage.value() > config.gwi.thresholds.mandatoryInterest ) {
+// 		audienseInterestList.push(audienseInterest.interest);
+// 	}
+// 	return audienseInterestList;
+// }, [] as Array<AudienseInterest>);
